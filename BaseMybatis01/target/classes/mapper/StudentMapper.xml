@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+    <!DOCTYPE mapper
+
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.zx.dao.StudentDao">
+
+        <!--新增操作   id必须和StudentDao中的方法名称一致-->
+
+        <insert id="addStudent" parameterType="Student">
+
+            /*因为我们的参数是Student对象   所以 values中的值 必须是Student类中的属性*/
+
+            INSERT  INTO  student1(age,name)  VALUES (#{age},#{name})
+
+        </insert>
+    <!--新增操作  会获取我们插入数据的id-->
+    <insert id="addStudentByCache" parameterType="Student">
+
+        /*因为我们的参数是Student对象   所以 values中的值 必须是Student类中的属性*/
+
+        INSERT  INTO  student1(age,name)  VALUES (#{age},#{name})
+        <selectKey resultType="int"  keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+
+    </insert>
+    <!--删除学生-->
+    <delete id="deleteStudent" parameterType="int">
+        DELETE  from student1 where id=#{id}
+    </delete>
+    <!--修改学生-->
+    <update id="updateStudent" parameterType="Student">
+        UPDATE student1 set name=#{name},age=#{age} where id=#{id}
+    </update>
+    <!--查询所有-->
+    <select id="SelectAllStudent" resultType="Student">
+        SELECT id ,name,age from student1
+    </select>
+
+    <!--查询所有返回Map-->
+    <select id="selectAllStudents" resultMap="studentMap">
+        SELECT id ,name,age from student1
+    </select>
+    <resultMap id="studentMap" type="Student">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+       <result property="age" column="age"></result>
+    </resultMap>
+    <!--根据id查询指定学生信息-->
+    <select id="findById" parameterType="int" resultType="Student">
+        SELECT id,name,age,from student1 where id=#{id}
+    </select>
+    <!--根据姓名模糊查询-->
+    <select id="selectByName" resultType="Student">
+        SELECT id,name,age from student1 where name LIKE concat('%',#{name},'%')
+    </select>
+</mapper>
