@@ -13,25 +13,7 @@
     <!--加载我们需要的properties文件  获取连接四要素-->
 
     <properties resource="jdbc.properties"/>
-    <settings>
 
-        <!--开启延迟加载  默认值是 false-->
-
-        <setting name="lazyLoadingEnabled" value="true"/>
-
-        <!--
-
-          我们的一个实体类中可以有多个延迟加载属性不？？ 肯定可以！
-
-          当启用后，一个有延迟加载属性的对象的任何一个延迟属性被加载时，该对象的所有的属性都会被加载。
-
-          否则，所有属性都是按需加载。默认值是true
-
-        -->
-
-        <setting name="aggressiveLazyLoading" value="false"/>
-
-    </settings>
     <!--创建类的别名-->
 
     <typeAliases>

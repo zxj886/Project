@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="MyBatisSecondLevelCache" />
+        <module name="BaseMapperMybatis" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="MyBatisSecondLevelCache" target="1.7" />
+      <module name="BaseMapperMybatis" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
