@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+    <!DOCTYPE mapper
+
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.zx.dao.StudentDao">
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+        <!--新增操作   id必须和StudentDao中的方法名称一致-->
+    <!-- 验证增删改 对 二级缓存的影响  flushCache="false" 新增不刷新缓存-->
+        <insert id="addStudent" parameterType="Student" flushCache="false" >
+
+            /*因为我们的参数是Student对象   所以 values中的值 必须是Student类中的属性*/
+
+            INSERT  INTO  student1(age,name)  VALUES (#{age},#{name})
+
+        </insert>
+    <!--根据学生编号查询 所有学生信息
+      01.局部关闭2级缓存   在对应的sql语句节点上 新增属性 useCache="false"
+      02.全局关闭2级缓存   在mybatis.xml文件中 新增
+       <setting name="cacheEnabled" value="false"/>
+
+         根据id查询指定学生信息 验证缓存-->
+    <select id="findById" parameterType="int" resultType="Student" useCache="false">
+        SELECT id,name,age from student1 where id=#{id}
+    </select>
+
+
+</mapper>
